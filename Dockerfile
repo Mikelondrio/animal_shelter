@@ -1,6 +1,6 @@
 FROM node:21.7.3
 
-WORKDIR  /app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -11,6 +11,8 @@ COPY . .
 EXPOSE 3000
 
 CMD ["npm","run","dev"]
+
+
 
 
 
