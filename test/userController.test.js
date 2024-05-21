@@ -32,7 +32,7 @@ describe("Test de userController",()=>{
         expect(user.user_rol).toEqual(userData.user_rol);
     })
     test("buscar usuario por propiedad",async()=>{
-        const users= await userController.getByProperty("email","mimail@mail.com");
+        const users= await userController.getByProperty("user_email","mimail@mail.com");
         expect(users.length).toBeGreaterThanOrEqual(1);
         const user = users[0];
         console.log("user",user);
@@ -43,7 +43,7 @@ describe("Test de userController",()=>{
 
     })
     test("buscar usuario por id",async()=>{
-        const users= await userController.getByProperty("email","mimail@mail.com");
+        const users= await userController.getByProperty("user_email","mimail@mail.com");
         const newUser = await userController.getById(users[0]._id);
         expect(newUser).not.toBeNull();
         expect(newUser.user_email).toEqual(userData.user_email);
