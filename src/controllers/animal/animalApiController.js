@@ -1,4 +1,4 @@
-import animalController from "./animalController.js";
+import animalController from "./animalConroller.js";
 
 const getAll = async(req,res)=>{
     const projectId = req.query.projectId;
