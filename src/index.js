@@ -7,7 +7,7 @@ import connectDB from './config/mongo.js';
 dotenv.config();// cargar variables de entorno
 
 const app = express();// crear servidor 
-
+connectDB();
 app.set('view engine', 'pug');// configurar motor de plantillas
 app.set('src/views',  'views');// configurar directorio de plantillas
 
