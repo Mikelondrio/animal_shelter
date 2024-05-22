@@ -33,6 +33,11 @@ const animalSchema = new mongoose.Schema({
         type: Boolean,
         default: false
 
+    },
+    shelter:{
+        type: mongoose.Schema.ObjectId,
+            ref: 'shelters',
+            required: true
     }
 })
 
