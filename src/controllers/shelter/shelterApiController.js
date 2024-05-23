@@ -39,7 +39,7 @@ const addUser = async(req,res)=>{
 
 const removeUser = async(req,res)=>{
     const shelterId = req.params.id;
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const shelter = await shelterController.removeUser(shelterId,userId);
     res.json({data:shelter})
 }
