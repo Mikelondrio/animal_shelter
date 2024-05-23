@@ -44,7 +44,7 @@ const addUser = async(req,res)=>{
 
 const removeUser = async(req,res)=>{
     const animalId = req.params.id;
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const animal = await animalController.removeUser(animalId,userId);
     res.json({data:animal})
 }
