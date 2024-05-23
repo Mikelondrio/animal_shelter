@@ -1,0 +1,650 @@
+openapi: 3.0.0
+info:
+  title: animal_shelter
+  version: 1.0.0
+  description: API para gestionar animales y refugios
+tags:
+  - name: shelter
+    description: Everything about shelters
+  - name: animal
+    description: Everything about animals
+  - name: user
+    description: Operations about user
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      summary: Obtener todos los usuarios
+      description: Devuelve una lista de todos los usuarios
+      responses:
+        200:
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+    post:
+      summary: Crear un nuevo usuario
+      description: Crea un nuevo usuario con los datos proporcionados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+  /users/{id}:
+    get:
+      tags:
+        - user
+      summary: Obtener un usuario por ID
+      description: Devuelve un usuario específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      responses:
+        200:
+          description: Datos del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+    put:
+      summary: Actualizar un usuario por ID
+      description: Actualiza los datos de un usuario específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: Usuario actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+    delete:
+      summary: Eliminar un usuario por ID
+      description: Elimina un usuario específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      responses:
+        200:
+          description: Usuario eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+  /users/search:
+    get:
+      tags:
+        - user
+      summary: Buscar usuarios por propiedad
+      description: Busca usuarios por una propiedad específica
+      parameters:
+        - in: query
+          name: property
+          schema:
+            type: string
+          required: true
+          description: Nombre de la propiedad por la que buscar
+        - in: query
+          name: value
+          schema:
+            type: string
+          required: true
+          description: Valor de la propiedad por la que buscar
+      responses:
+        200:
+          description: Lista de usuarios que coinciden con la búsqueda
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+  /users/register:
+    post:
+      tags:
+        - user
+      summary: Registrar un nuevo usuario
+      description: Registra un nuevo usuario con los datos proporcionados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: Usuario registrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+  /users/login:
+    post:
+      tags:
+        - user
+      summary: Iniciar sesión de usuario
+      description: Autentica a un usuario y devuelve un token JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Sesión iniciada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        401:
+          description: Credenciales incorrectas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /shelters:
+    get:
+      tags:
+        - shelter
+      summary: Obtener todos los refugios
+      description: Devuelve una lista de todos los refugios
+      responses:
+        200:
+          description: Lista de refugios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Shelter'
+    post:
+      summary: Crear un nuevo refugio
+      description: Crea un nuevo refugio con los datos proporcionados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShelterInput'
+      responses:
+        200:
+          description: Refugio creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+  /shelters/{id}:
+    get:
+      tags:
+        - shelter
+      summary: Obtener un refugio por ID
+      description: Devuelve un refugio específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del refugio
+      responses:
+        200:
+          description: Datos del refugio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+    put:
+      summary: Actualizar un refugio por ID
+      description: Actualiza los datos de un refugio específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del refugio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShelterInput'
+      responses:
+        200:
+          description: Refugio actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+    delete:
+      summary: Eliminar un refugio por ID
+      description: Elimina un refugio específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del refugio
+      responses:
+        200:
+          description: Refugio eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+  /shelters/{id}/users:
+    post:
+      tags:
+        - shelter
+      summary: Añadir usuario a un refugio
+      description: Asocia un usuario a un refugio específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del refugio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: ID del usuario
+      responses:
+        200:
+          description: Usuario añadido al refugio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+  /shelters/{id}/users/{userId}:
+    delete:
+      tags:
+        - shelter
+      summary: Eliminar usuario de un refugio
+      description: Elimina la asociación de un usuario con un refugio específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del refugio
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      responses:
+        200:
+          description: Usuario eliminado del refugio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Shelter'
+  /animals:
+    get:
+      tags: 
+        - animal
+      summary: Obtener todos los animales
+      description: Devuelve una lista de todos los animales
+      parameters:
+        - in: query
+          name: projectId
+          schema:
+            type: string
+          required: false
+          description: ID del proyecto para filtrar animales
+      responses:
+        200:
+          description: Lista de animales
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Animal'
+    post:
+      summary: Crear un nuevo animal
+      description: Crea un nuevo animal con los datos proporcionados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalInput'
+      responses:
+        200:
+          description: Animal creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+  /animals/{id}:
+    get:
+      tags: 
+        - animal
+      summary: Obtener un animal por ID
+      description: Devuelve un animal específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+      responses:
+        200:
+          description: Datos del animal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+    put:
+      summary: Actualizar un animal por ID
+      description: Actualiza los datos de un animal específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalInput'
+      responses:
+        200:
+          description: Animal actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+    delete:
+      summary: Eliminar un animal por ID
+      description: Elimina un animal específico por su ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+      responses:
+        200:
+          description: Animal eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+  /animals/{id}/status:
+    patch:
+      tags: 
+        - animal
+      summary: Cambiar el estado de un animal
+      description: Actualiza el estado de un animal específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: Nuevo estado del animal
+      responses:
+        200:
+          description: Estado del animal actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+  /animals/{id}/users:
+    post:
+      tags: 
+        - animal
+      summary: Añadir usuario a un animal
+      description: Asocia un usuario a un animal específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: ID del usuario
+      responses:
+        200:
+          description: Usuario añadido al animal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+  /animals/{id}/users/{userId}:
+    delete:
+      tags: 
+        - animal
+      summary: Eliminar usuario de un animal
+      description: Elimina la asociación de un usuario con un animal específico
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del animal
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      responses:
+        200:
+          description: Usuario eliminado del animal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Animal'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    UserInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    Shelter:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        capacity:
+          type: integer
+    ShelterInput:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        capacity:
+          type: integer
+    Animal:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        species:
+          type: string
+        age:
+          type: integer
+        status:
+          type: string
+    AnimalInput:
+      type: object
+      properties:
+        name:
+          type: string
+        species:
+          type: string
+        age:
+          type: integer
+        status:
+          type: string
