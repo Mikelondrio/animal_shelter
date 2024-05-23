@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
 
 const animalSchema = new mongoose.Schema({
+    animal_name : {
+        type: String,
+        required: true
+    },
     animal_specie : {
         type: String,
         required: true,
-        unique: true
     },
     animal_race : {
         type: String,
