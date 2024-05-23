@@ -1,5 +1,6 @@
 import shelterModel from "../../models/shelterModel.js";
 
+
 const getAll = async()=> {
     try {
         const shelters = await shelterModel.find();
@@ -12,6 +13,10 @@ const getAll = async()=> {
 const getById = async(id) =>{
     try {
         const shelter = await shelterModel.findById(id);
+        if(!shelter){
+            return null;
+        }
+        await shelter.populate("animals");
         return shelter;
     } catch (error) {
         console.error(error);
@@ -75,6 +80,33 @@ const removeUser = async(shelterId,userId)=>{
         return null;
     }
 }
+const addAnimal = async(shelterId,animalId) =>{
+    try {
+        const shelter = await getById(shelterId);
+        if(!shelter.animals.includes(animalId)){
+            shelter.animals.push(animalId);
+            await shelter.save();
+            console.log("muestrame el shelter", shelter);
+            return shelter
+        }
+        return shelter;
+    } catch (error) {
+        return null;
+    }
+}
+const removeAnimal = async(shelterId,animalId)=>{
+    try {
+        const shelter = await getById(shelterId);
+        if(shelter.animals.includes(animalId)){
+            shelter.animals = shelter.animals.filter(u=> u!==animalId);
+            await shelter.save();
+            return shelter
+        }
+        return shelter;
+    } catch (error) {
+        return null;
+    }
+}
 export const functions = {
     getAll,
     getById,
@@ -83,6 +115,8 @@ export const functions = {
     remove,
     addUser,
     removeUser,
+    addAnimal,
+    removeAnimal
 }
 
 export default functions;

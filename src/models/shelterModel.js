@@ -15,8 +15,11 @@ const shelterSchema = new mongoose.Schema({
     shelter_size : {
         type: Number,
         required: true
-    }
-    
+    },
+    animals:[{
+        type: mongoose.Schema.ObjectId,
+            ref: 'animal'
+    }]
 })
 
 const shelterModel = mongoose.model("shelter", shelterSchema);

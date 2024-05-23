@@ -9,8 +9,8 @@ const router  =  Router();
 router.get("/",(req,res)=>{
     res.json({data:"hello api"});
 })
-router.use("/user",isAdmin,userRouter);
-router.use("/animal",isAuthenticated,animalRouter);
-router.use("/shelter",isAuthenticated,shelterRouter);
+router.use("/user",userRouter);
+router.use("/animal",animalRouter);
+router.use("/shelter",shelterRouter);
 
 export default router;

@@ -1,4 +1,5 @@
 import animalModel from "../../models/animalModel.js";
+import shelterController from "../shelter/shelterController.js";
 
 const getAll = async()=> {
     try {
@@ -22,7 +23,18 @@ const getById = async(id) =>{
 
 const create = async(data) =>{
     try {
+        // si data es un array de objetos, crear un nuevo registro para cada uno de ellos y añadir al refugio correspondiente
+        if(Array.isArray(data)){
+            const animals = [];
+            for(let i=0;i<data.length;i++){
+                const animal = await animalModel.create(data[i]);
+                await shelterController.addAnimal(animal.shelter,animal._id);
+                animals.push(animal);
+            }
+            return animals;
+        }
         const animal = await animalModel.create(data);
+        await shelterController.addAnimal(animal.shelter,animal._id);
         return animal;
     } catch (error) {
         console.error(error); 
@@ -43,6 +55,7 @@ const update = async(id,data) =>{
 const remove = async(id) =>{
     try {
         const animal = await animalModel.findByIdAndDelete(id);
+        await shelterController.removeAnimal(animal.shelter,animal._id);
         return animal;
     } catch (error) {
         console.error(error);
