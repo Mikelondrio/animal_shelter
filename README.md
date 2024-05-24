@@ -29,38 +29,31 @@ Esta API proporciona endpoints para gestionar usuarios, refugios y animales. Los
 ## Modelos
 
 ### Usuario (user)
-
-{
   
-  "user_name": "string",
-  "user_password": "string",
-  "user_email": "string",
-  "user_city": "string",
-  "user_rol": "string"
-}
+  - user_name
+  - user_password
+  - user_email
+  - user_city
+  - user_rol
 
 ### Refugio (shelter)
 
-{
-  "shelter_name": "string",
-  "shelter_location": "string",
-  "shelter_size": "number",
-  "animals": "id"
-}
+  - shelter_name
+  - shelter_location
+  - shelter_size
+  - animals
 
 ### Animal (animal)
 
-{
-  "animal_name": "string",
-  "animal_race": "string",
-  "animal_specie": "string",
-  "animal_sex": "string",
-  "animal_disease": "string",
-  "animal_vaccine": "string",
-  "animal_stirilize": "boolean",
-  "animal_hospitalization": "boolean",
-  "shelter": "id"
-}
+- animal_name
+- animal_race
+- animal_specie
+- animal_sex
+- animal_disease
+- animal_vaccine
+- animal_stirilize
+- animal_hospitalization
+- shelter
 
 
 ## Instalación
