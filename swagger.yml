@@ -30,6 +30,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/User'
     post:
+      tags:
+        - user
       summary: Crear un nuevo usuario
       description: Crea un nuevo usuario con los datos proporcionados
       requestBody:
@@ -72,6 +74,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/User'
     put:
+      tags:
+        - user
       summary: Actualizar un usuario por ID
       description: Actualiza los datos de un usuario específico
       parameters:
@@ -98,6 +102,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/User'
     delete:
+      tags:
+        - user
       summary: Eliminar un usuario por ID
       description: Elimina un usuario específico por su ID
       parameters:
@@ -225,6 +231,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/Shelter'
     post:
+      tags:
+        - shelter
       summary: Crear un nuevo refugio
       description: Crea un nuevo refugio con los datos proporcionados
       requestBody:
@@ -267,6 +275,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/Shelter'
     put:
+      tags:
+        - shelter
       summary: Actualizar un refugio por ID
       description: Actualiza los datos de un refugio específico
       parameters:
@@ -293,6 +303,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/Shelter'
     delete:
+      tags:
+        - shelter
       summary: Eliminar un refugio por ID
       description: Elimina un refugio específico por su ID
       parameters:
@@ -400,6 +412,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/Animal'
     post:
+      tags:
+        - animal
       summary: Crear un nuevo animal
       description: Crea un nuevo animal con los datos proporcionados
       requestBody:
@@ -442,6 +456,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/Animal'
     put:
+      tags:
+        - animal
       summary: Actualizar un animal por ID
       description: Actualiza los datos de un animal específico
       parameters:
@@ -468,6 +484,8 @@ paths:
                   data:
                     $ref: '#/components/schemas/Animal'
     delete:
+      tags:
+        - animal
       summary: Eliminar un animal por ID
       description: Elimina un animal específico por su ID
       parameters:
