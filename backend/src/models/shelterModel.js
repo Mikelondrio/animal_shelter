@@ -16,6 +16,14 @@ const shelterSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    shelter_latitude : {
+        type: Number,
+        required: true
+    },
+    shelter_longitude : {
+        type: Number,
+        required: true
+    },
     animals:[{
         type: mongoose.Schema.ObjectId,
             ref: 'animal'
