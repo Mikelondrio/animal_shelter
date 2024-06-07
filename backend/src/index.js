@@ -3,11 +3,13 @@ import dotenv from 'dotenv'; // cargar variables de entorno
 import session from 'express-session';// para crear sesiones
 import router from './routes/router.js';// importar rutas
 import connectDB from './config/mongo.js';
+import cors from 'cors'
 
 dotenv.config();// cargar variables de entorno
 
 const app = express();// crear servidor 
 connectDB();
+app.use(cors());
 app.set('view engine', 'pug');// configurar motor de plantillas
 app.set('src/views',  'views');// configurar directorio de plantillas
 
@@ -25,7 +27,7 @@ app.use(session({
         }
 }));// configurar sesión 
 
-app.use('/', router);// configurar rutas
+app.use('/api', router);// configurar rutas
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${process.env.PORT}`);

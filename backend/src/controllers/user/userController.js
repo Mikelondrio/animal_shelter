@@ -1,5 +1,6 @@
 import userModel from "../../models/userModel.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 
 const getAll = async()=> {
@@ -36,18 +37,18 @@ const login = async(data) =>{
     }
     try {
         let user;
-        if(email){
-            const users = await getByProperty("user_name",user_name);
+        if(user_email){
+            const users = await getByProperty("user_email",user_email);
             user = users[0];
         }
         else{
-            const users = await getByProperty("user_email",user_email);
+            const users = await getByProperty("user_name",user_name);
             user = users[0];
         }
         if(!user){
             return {error:"No existe el usaurio",status:400};
         }
-        console.log("contraseña",password,user.password);
+        console.log("contraseña",user_password,user.user_password);
         const isPasswordCorrect = await bcrypt.compare(user_password,user.user_password);
         if(!isPasswordCorrect){
             return {error:"Combinación de usaurio y contraseña erroneos",status:400};

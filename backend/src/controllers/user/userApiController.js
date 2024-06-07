@@ -11,6 +11,13 @@ const getById = async (req,res) =>{
     res.json({data:user});
 }
 
+const getByToken = async (req,res) =>{
+    const id = req.user._id;
+    const user = await userController.getById(id);
+    res.json({data:user});
+}
+
+
 const getByProperty=async(req,res)=>{
     const {property,value}=req.query;
     const users = await userController.getByProperty(property,value);
@@ -19,6 +26,9 @@ const getByProperty=async(req,res)=>{
 
 const register = async(req,res)=>{
     const user = await userController.register(req.body);
+    if(!user){
+        return res.json({error:"Ha habido un error"});
+    }
     if(user.error){
         return res.json({error:user.error});
     }
@@ -57,6 +67,7 @@ export default{
     update,
     remove,
     register,
-    login
+    login,
+    getByToken
 }
 
