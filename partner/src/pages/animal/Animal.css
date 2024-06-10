@@ -1,0 +1,16 @@
+.animal-list{
+    padding-left: 100px;
+    padding-right: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.animal-list-element{
+    background-color: rgba(103, 170, 86, 0.74);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+

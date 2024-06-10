@@ -13,7 +13,7 @@ const SheltersList = () => {
                 <h2>{shelter.shelter_name}</h2>
                 <p>{shelter.shelter_location}</p>
                 <p>{shelter.shelter_size} m²</p>
-                <Link to={`/shelters/${shelter._id}/animals`}>View</Link>
+                <Link to={`/shelters/${shelter._id}`}>View</Link>
             </article>
             
         )
@@ -21,16 +21,17 @@ const SheltersList = () => {
     return (
         <>
         <h1>These are our partners</h1>
-        {creatingShelter ?
+        
+            <section className="shleter-list">
+                {sheltersHtml}
+            </section>
+            {creatingShelter ?
             <Modal onClose={()=>setCreatingShelter(false)}>
                 <CreateShelter onCreate={()=>setCreatingShelter(false)}/>
             </Modal>
             :
             <button onClick={()=>setCreatingShelter(true)}>New Shelter</button>
         }
-            <section className="shleter-list">
-                {sheltersHtml}
-            </section>
         </>
     )
 }

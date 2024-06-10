@@ -11,7 +11,7 @@ const AnimalsList = () => {
         (
             <article className="animal-list-element" key={animal._id}>
                 <h2>{animal.animal_name}</h2>
-                <p>{animal.animal_race}</p>
+                <p>{animal.animal_specie}</p>
                 <p>{animal.animal_sex} </p>
               
             </article>
@@ -21,16 +21,17 @@ const AnimalsList = () => {
     return (
         <>
         <h1>These are our friends</h1>
-        {creatingAnimal ?
+        
+            <section className="animal-list">
+                {animalsHtml}
+            </section>
+            {creatingAnimal ?
             <Modal onClose={()=>setCreatingAnimal(false)}>
                 <CreateAnimal onCreate={()=>setCreatingAnimal(false)}/>
             </Modal>
             :
             <button onClick={()=>setCreatingAnimal(true)}>New Animal</button>
         }
-            <section className="animal-list">
-                {animalsHtml}
-            </section>
         </>
     )
 }

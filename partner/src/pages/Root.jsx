@@ -24,8 +24,8 @@ const Root = () => {
       }
     return (
         <div>
-            <nav>
-                <ul>
+            <nav className="navContainer">
+                <ul className="navList">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
@@ -44,9 +44,11 @@ const Root = () => {
                     <li>
                         <Link to="/register">Register/Login</Link>
                     </li>
+                    <li><h1 className="navUser">Welcome: {user?.user_name}</h1></li>
                 </ul>
+                
             </nav>
-            <h1>Welcome dear {user?.user_name}</h1>
+            
             <Outlet />
         </div>
     )

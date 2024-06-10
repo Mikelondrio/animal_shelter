@@ -62,6 +62,10 @@ const getAnimals = async()=>{
     const result = await fetchData("/animals","get");
     return result;
 }
+const getAnimalsByShelter = async(shelterid)=>{
+    const result = await fetchData("/animals/byshelter/"+shelterid,"get");
+    return result;
+}
 const getAnimal = async(id)=>{
     const result = await fetchData("/animals/"+id,"get");
     return result;
@@ -81,5 +85,5 @@ export {
     getAnimals,
     getAnimal,
     createAnimal,
-    getAnimalsByShelter
+    getAnimalsByShelter 
 }

@@ -1,0 +1,9 @@
+
+.aboutImg{
+display: flex;
+}
+
+.aboutText{
+    text-align: left;
+    margin-left: auto;
+}

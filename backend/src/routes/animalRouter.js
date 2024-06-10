@@ -1,12 +1,14 @@
 import {Router} from "express";
 
 import animalApiController from "../controllers/animal/animalApiController.js";
+import animalModel from "../models/animalModel.js";
 
 
 const router  = Router();
 
 router.get("/",animalApiController.getAll);
 router.get("/:id",animalApiController.getById);
+router.get("/byshelter/:shelterid",animalApiController.getAnimalsByShelter);
 router.post("/",animalApiController.create);
 router.put("/:id",animalApiController.update);
 router.delete("/:id",animalApiController.remove);

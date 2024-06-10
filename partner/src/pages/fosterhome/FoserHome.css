@@ -1,0 +1,24 @@
+.foster-list {
+    column-count: 2; 
+    column-gap: 80px; 
+    padding: auto;
+    margin-top: 30px;
+}
+.foster-list-requirements {
+    margin-bottom: 50px; 
+}
+
+.foster{
+    text-align: left;
+}
+
+.fosterContainer{
+    margin-left: -155x;
+}
+
+
+
+.fosterTitleLite{
+    
+    font-size: 30px;
+}

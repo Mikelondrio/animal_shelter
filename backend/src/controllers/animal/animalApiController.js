@@ -1,10 +1,17 @@
 import animalController from "./animalController.js";
 
 const getAll = async(req,res)=>{
-    const projectId = req.query.projectId;
-    const animals = await animalController.getAll(projectId);
+    const animalId = req.query.animalId;
+    const animals = await animalController.getAll(animalId);
     res.json({data:animals});
 }
+
+const getAnimalsByShelter = async (req, res) => {
+    const shelterId = req.params.shelterid;
+    const animalsInShelter = await animalController.getAnimalsByShelter(shelterId);
+    res.json({ data: animalsInShelter });
+};
+
 
 const getById = async (req,res) =>{
     const id = req.params.id
@@ -59,4 +66,5 @@ export default{
     remove,
     addUser,
     removeUser,
+    getAnimalsByShelter
 }

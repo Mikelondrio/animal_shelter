@@ -1,5 +1,5 @@
 import {createBrowserRouter,redirect} from "react-router-dom";
-import { getShelters,getShelter, getAnimals, getAnimalsByShelter } from "./utils/fetch";
+import {getShelters,getShelter,getAnimals,getAnimalsByShelter} from "./utils/fetch";
 import Root from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
 import Register from "./pages/register/Register";
@@ -23,7 +23,10 @@ async function fetchShelter(id){
     if(result.error){
         return redirect("/register");
     }
-    return result.data;
+    const animals = await getAnimalsByShelter(id);
+    const shelter = result.data;
+    shelter.animals=animals.data;
+    return shelter;
 }
 async function fetchAnimals(){
     const result = await getAnimals();
@@ -49,7 +52,9 @@ const router = createBrowserRouter([
       children: [
         {
             path: "/",
-            element: <h2>Welcome to yours and our ZooMundus</h2>
+            element: <div className="titleCont"><h2>Welcome to yours, and our <h1 className="title">ZooMundus</h1></h2>
+            <img src="../../landscape5.jpg" alt="" className="homeImg"/>
+            </div>
         },
         {
             path: "/shelters",

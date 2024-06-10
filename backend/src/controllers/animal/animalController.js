@@ -10,6 +10,15 @@ const getAll = async()=> {
         return [];
     }
 }
+const getAnimalsByShelter = async(shelter)=> {
+    try {
+        const animals = await animalModel.find({shelter});
+        return animals;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
 const getById = async(id) =>{
     try {
         const animal = await animalModel.findById(id);
@@ -96,6 +105,7 @@ export const functions = {
     remove,
     addUser,
     removeUser,
+    getAnimalsByShelter
 }
 
 export default functions;
